@@ -4,7 +4,10 @@
 'use strict';
 
 var express    = require('express');
-var MovieModel = require('./models/movie');
+var Zone = require('./api/zones/parkZone.controller');
+var Car  = require('./api/cars/car.controller');
+var User  = require('./api/users/user.controller');
+
 module.exports = function(app){
   //Routes for the API
   var router = express.Router();
@@ -16,47 +19,52 @@ module.exports = function(app){
   //general routes
   router.get('/', function(req,res){
     res.json({
-      provider: 'http://api.movie-tracking.com',
-      owner: 'Yoab Pizarro',
-      contact: 'yoab [dot] pizarro [at] gmail [dot] com'
+      owner: 'Kali IoT',
+      description: 'API for parking IoT data.'
     });
   });
 
   //API routes
-  router.route('/movies')
+  //Zones
+  router.route('/zones')
     .get(function(req, res){
-      MovieModel.find(function(err, movies){
-        if(err){
-          res.status(500).send(err);
-        }
-        res.status(200).json(movies);
-      });
+      Zone.index(req, res);
     });
-  router.route('/movies')
+  router.route('/zones')
     .post(function(req, res){
-      MovieModel.create(req.body, function(err, movie) {
-        if(err) {
-          return res.status(500).send(err);
-        }
-        return res.status(201).json(movie);
-      });
+      Zone.create(req, res);
     });
-  router.route('/movies')
+  router.route('/zones/:id')
     .delete(function(req, res){
-      MovieModel.findById(req.body.id, function (err, movie) {
-        if(err) {
-          return res.status(500).send(err);
-        }
-        if(!movie) {
-          return res.status(404).send('Not Found');
-        }
-        movie.remove(function(err) {
-          if(err) {
-            return res.status(500).send(err);
-          }
-          return res.status(204).send('No Content');
-        });
-      });
+      Zone.destroy(req, res);
     });
+
+  //Car
+  router.route('/cars')
+    .get(function(req, res){
+      Zone.index(req, res);
+    });
+  router.route('/cars')
+    .post(function(req, res){
+      Zone.create(req, res);
+    });
+  router.route('/cars/:id')
+    .delete(function(req, res){
+      Zone.destroy(req, res);
+    });
+  //Users
+  router.route('/users')
+    .get(function(req, res){
+      Zone.index(req, res);
+    });
+  router.route('/users')
+    .post(function(req, res){
+      Zone.create(req, res);
+    });
+  router.route('/users/:id')
+    .delete(function(req, res){
+      Zone.destroy(req, res);
+    });
+
   app.use('/api', router);
 };

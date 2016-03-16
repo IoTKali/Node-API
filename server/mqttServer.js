@@ -24,8 +24,43 @@ server.on('ready', setup);
 server.on('clientConnected', function(client) {
     console.log('client connected', client.id);
 });
+//mqtt config for app
+var ZoneModel = require('./api/zones/parkZone.model');
+var _ = require('lodash');
+server.on('published', function(packet, client) {
+  if (client){
+    console.log('Topic:', packet.topic);
+    console.log('Published:', packet.payload.toString());
+    var fromZone = packet.payload.toString();
+    var toZone   = packet.topic;
+    //Update car count
+    ZoneModel.findOne({ Name: fromZone}, function (err, zone){
+      if(err) { console.log('Error', err); return;}
+      if(!zone){console.log('Invalid Zone',fromZone); return;}
+      zone.Cars--;
+      zone.save(function (err) {
+        if (err) { console.log('Error', err); return; }
+        console.log('Updated', zone.Name);
+      });
+    });
+    ZoneModel.findOne({ Name: toZone}, function (err, zone){
+      if(err) { console.log('Error', err); return;}
+      if(!zone){console.log('Invalid Zone',toZone); return;}
+      zone.Cars++;
+      zone.save(function (err) {
+        if (err) { console.log('Error', err); return; }
+        console.log('Updated', zone.Name);
+      });
+    });
+  }
+
+
+});
+
 
 function setup() {
   console.log('Mosca server is up and running')
 }
+
+
 module.exports = server;
