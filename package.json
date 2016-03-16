@@ -6,6 +6,7 @@
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "lodash": "^4.3.0",
-    "mongoose": "^4.4.3"
+    "mongoose": "^4.4.3",
+    "mosca": "^1.1.2"
   }
 }

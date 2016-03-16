@@ -4,13 +4,16 @@
 'use strict';
 
 //dependencies
-
 var express  = require ('express');
 var mongoose = require ('mongoose');
 var config   = require ('./config/enviroment');
-
+var mqtt    = require ('./mqttServer');
+//mqtt config
+mqtt.on('published', function(packet, client) {
+  console.log('Topic', packet.topic);
+  console.log('Published', packet.payload.toString());
+});
 //connect to MongoDB
-//mongodb://localhost/movieTracking
 mongoose.connect(config.mongoDB.uri, config.mongoDB.options);
 mongoose.connection.on('error', function(err){
   console.log('MongoDB connection error: ' + err);
