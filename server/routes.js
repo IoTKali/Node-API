@@ -53,15 +53,19 @@ module.exports = function(app){
   //Car
   router.route('/cars')
     .get(function(req, res){
-      Zone.index(req, res);
+      Car.index(req, res);
     });
   router.route('/cars')
     .post(function(req, res){
-      Zone.create(req, res);
+      Car.create(req, res);
     });
   router.route('/cars/:id')
     .delete(function(req, res){
-      Zone.destroy(req, res);
+      Car.destroy(req, res);
+    });
+  router.route('/cars/user/:Email')
+    .get(function(req, res){
+      Car.byEmail(req, res);
     });
   //Users
   router.route('/users')
@@ -75,6 +79,10 @@ module.exports = function(app){
   router.route('/users')
     .post(function(req, res){
       User.create(req, res);
+    });
+  router.route('/users/:Email')
+    .patch(function(req, res){
+      User.addCar(req, res);
     });
   router.route('/users/:id')
     .delete(function(req, res){

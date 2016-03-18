@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Car = require('./car.model');
-
+var UserModel = require('../users/user.model');
 // Get list of Cars
 exports.index = function(req, res) {
   Car.find(function (err, cars) {
@@ -54,7 +54,17 @@ exports.destroy = function(req, res) {
     });
   });
 };
-
+//get cars by user Email
+exports.byEmail = function(req, res){
+  UserModel.findOne({Email: req.params.Email}, function(err,user){
+    if(err) { return handleError(res, err); }
+    if(!user) { return res.status(404).send('Not Found'); }
+    Car.find({Plates: { $in: user.Plates }}, function (err, cars) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(cars);
+    });
+  });
+}
 function handleError(res, err) {
   return res.status(500).send(err);
 }

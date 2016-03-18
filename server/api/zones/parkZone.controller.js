@@ -70,8 +70,31 @@ exports.getPriority = function (req, res){
       ZoneDictionary[zone.Name] = zone;
     });
     var distances = utils.Dijkstra(ZoneDictionary, target);
-
-    return res.status(200).json(distances);
+    var distArray = [];
+    for (var zone in distances) {
+      if (distances.hasOwnProperty(zone)) {
+        distArray.push({name: zone, dist: distances[zone]});
+      }
+    }
+    distArray.sort(function(a, b) {
+      return a.dist - b.dist;
+    });
+    var resultArray = [];
+    var rejected = [];
+    distArray.forEach(function(elem){
+      var disponibility = ZoneDictionary[elem.name].Spots
+                        - ZoneDictionary[elem.name].Cars;
+      if(disponibility > 0){
+        resultArray.push(ZoneDictionary[elem.name]);
+      }
+      else{
+        rejected.push(ZoneDictionary[elem.name]);
+      }
+    });
+    rejected.forEach(function(elem){
+      resultArray.push(elem);
+    });
+    return res.status(200).json(resultArray);
   });
 }
 function handleError(res, err) {

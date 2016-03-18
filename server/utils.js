@@ -67,7 +67,6 @@ function removeElement(array, element){
   }
 }
 exports.Dijkstra = function Dijkstra(Graph, source){
-  console.log('Source:', source);
   var Q = [];
   var dist = {};
   var prev = {};
@@ -81,16 +80,10 @@ exports.Dijkstra = function Dijkstra(Graph, source){
   dist[source] = 0;
   while(Q.length > 0){
     var u = smallest(Q, dist);
-    console.log('U:',u);
-    console.log(dist);
     removeElement(Q, u);
     Graph[u].Adjacent.forEach(function (v){
       var deltaDist = getDistance(Graph[u].Center, Graph[v].Center);
-      console.log('delta',deltaDist);
-      console.log('du', dist[u]);
       var alt = dist[u] + deltaDist;
-      console.log('alt', alt);
-      console.log('dv', dist[v]);
       if(alt < dist[v]){
         dist[v] = alt;
         prev[v] = u;

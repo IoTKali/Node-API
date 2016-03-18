@@ -42,7 +42,20 @@ exports.update = function(req, res) {
     });
   });
 };
-
+//add car to users
+exports.addCar = function(req, res){
+  User.findOne({ Email: req.params.Email}, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.status(404).send('Not Found'); }
+    req.body.Plates.forEach(function(pl){
+      user.Plates.push(pl);
+    });
+    user.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(user);
+    });
+  });
+};
 // Deletes a user from the DB.
 exports.destroy = function(req, res) {
   User.findById(req.params.id, function (err, user) {
@@ -56,9 +69,10 @@ exports.destroy = function(req, res) {
 };
 //verify
 exports.verify = function (req, res){
+  if (!req.body.Email && !req.body.Password){return res.status(204).send('No Content');}
   User.findOne({ Email: req.body.Email }, function(err, user) {
     if(err) { return handleError(res, err); }
-    // test a matching password
+    if(!user) { return res.status(404).send('Not Found'); }
     if(user.Password === req.body.Password){
       return res.status(200).json(user);
     }
