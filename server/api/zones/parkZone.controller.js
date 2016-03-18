@@ -1,13 +1,14 @@
 'use strict';
 
 var _ = require('lodash');
+var utils = require('../../utils');
 var Zone = require('./parkZone.model');
 
 // Get list of zones
 exports.index = function(req, res) {
   Zone.find(function (err, zones) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(zones);
+    return res.status(200).jsonp(zones);
   });
 };
 
@@ -22,6 +23,9 @@ exports.show = function(req, res) {
 
 // Creates a new zone in the DB.
 exports.create = function(req, res) {
+  if(!req.body.Center){ //Center not provided, calculate
+    req.body.Center = utils.getLatLngCenter(req.body.Points);
+  }
   Zone.create(req.body, function(err, zone) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(zone);
@@ -36,6 +40,7 @@ exports.update = function(req, res) {
     if(!zone) { return res.status(404).send('Not Found'); }
 
     _.extend(zone, req.body);
+    console.log(zone);
     zone.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(zone);
@@ -54,7 +59,21 @@ exports.destroy = function(req, res) {
     });
   });
 };
+//Get Zones ordered by priority, according to
+exports.getPriority = function (req, res){
+  var target = req.params.zone;
+  //Create zone dictionary
+  var ZoneDictionary = {};
+  Zone.find(function (err, zones) {
+    if(err) { return handleError(res, err); }
+    zones.forEach(function (zone){
+      ZoneDictionary[zone.Name] = zone;
+    });
+    var distances = utils.Dijkstra(ZoneDictionary, target);
 
+    return res.status(200).json(distances);
+  });
+}
 function handleError(res, err) {
   return res.status(500).send(err);
 }

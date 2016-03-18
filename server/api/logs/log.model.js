@@ -5,13 +5,19 @@ var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 
 //define Schema
-var parkZoneSchema = new Schema ({
-  Date: ,
-  Points: [{latitude:Number, longitude: Number}],
-  Name: String,
-  Spots: Number,
-  SpecialSpots: Number,
-  Cars: Number
+var logSchema = new Schema ({
+  Entry: Date, //Enter date
+  User: {
+    Name: String,
+    Age:  Number,
+    Gender: String,
+    Condition: String
+  },
+  Car: {
+    Plates: String,
+    Brand: String,
+    Year: Number
+  }
 });
 
-module.exports = mongoose.model('Log', parkZoneSchema);
+module.exports = mongoose.model('Log', logSchema);

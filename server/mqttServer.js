@@ -26,11 +26,25 @@ server.on('clientConnected', function(client) {
 });
 //mqtt config for app
 var ZoneModel = require('./api/zones/parkZone.model');
+var LogModel  = require('./api/logs/log.model');
+var CarModel  = require('./api/cars/car.model');
+var UserModel = require('./api/users/user.model');
 var _ = require('lodash');
 server.on('published', function(packet, client) {
   if (client){
     console.log('Topic:', packet.topic);
     console.log('Published:', packet.payload.toString());
+    //check for entry
+    var entryRgx = /^entry\//;
+    if(entryRgx.test(packet.topic)){
+      var zone = packet.topic.replace(entryRgx, '');
+      var plates = packet.payload.toString();
+      console.log('Entry:',zone);
+      console.log('Plates:',plates);
+      return;
+    }
+
+
     var fromZone = packet.payload.toString();
     var toZone   = packet.topic;
     //Update car count

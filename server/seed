@@ -1,0 +1,103 @@
+{
+    "Name": "Zona Amarilla",
+    "Spots": 42,
+    "SpecialSpots": 8,
+    "Cars": 25,
+    "Points": [
+      {"latitude":20.733284, "longitude":-103.453718},
+      {"latitude":20.734658, "longitude":-103.453518},
+      {"latitude":20.734738, "longitude":-103.454248},
+      {"latitude":20.733368, "longitude":-103.454393}
+    ]
+}
+{
+    "Name": "Zona Roja",
+    "Spots": 33,
+    "SpecialSpots": 0,
+    "Cars": 30,
+    "Points": [
+      {"latitude":20.734673, "longitude":-103.453493},
+      {"latitude":20.735224, "longitude":-103.453419},
+      {"latitude":20.735309, "longitude":-103.454189},
+      {"latitude":20.734732, "longitude":-103.454261}
+    ]
+}
+{
+    "Name": "Zona Morada",
+    "Spots": 80,
+    "SpecialSpots": 4,
+    "Cars": 70,
+    "Points": [
+      {"latitude":20.735251, "longitude":-103.453419},
+      {"latitude":20.736086, "longitude":-103.453269},
+      {"latitude":20.736151, "longitude":-103.454133},
+      {"latitude":20.735316, "longitude":-103.454208}
+    ]
+}
+{
+    "Name": "Zona Verde",
+    "Spots": 80,
+    "SpecialSpots": 4,
+    "Cars": 70,
+    "Points": [
+      {"latitude":20.736184, "longitude":-103.453272},
+      {"latitude":20.737481, "longitude":-103.453039},
+      {"latitude":20.737639, "longitude":-103.453997},
+      {"latitude":20.736242, "longitude":-103.454131}
+    ]
+}
+{
+    "Name": "Zona Naranja",
+    "Spots": 20,
+    "SpecialSpots": 5,
+    "Cars": 13,
+    "Points": [
+      {"latitude":20.735978, "longitude":-103.453190},
+      {"latitude":20.735807, "longitude":-103.452430},
+      {"latitude":20.736519, "longitude":-103.452264},
+      {"latitude":20.736634, "longitude":-103.453042}
+    ]
+}
+{
+    "Name": "Zona Centro Congresos",
+    "Spots": 50,
+    "SpecialSpots": 10,
+    "Cars": 27,
+    "Points": [
+      {"latitude":20.732259, "longitude":-103.454647},
+      {"latitude":20.732836, "longitude":-103.454524},
+      {"latitude":20.732886, "longitude":-103.454991},
+      {"latitude":20.732455, "longitude":-103.455597},
+      {"latitude":20.732440, "longitude":-103.456037},
+      {"latitude":20.732044, "longitude":-103.455903},
+      {"latitude":20.731934, "longitude":-103.455222}
+    ]
+}
+{
+    "Name": "Zona Centro Visitantes",
+    "Spots": 40,
+    "SpecialSpots": 4,
+    "Cars": 24,
+    "Points": [
+      {"latitude":20.731951, "longitude":-103.456159},
+      {"latitude":20.732302, "longitude":-103.456038},
+      {"latitude":20.732881, "longitude":-103.456461},
+      {"latitude":20.732909, "longitude":-103.457223},
+      {"latitude":20.732553, "longitude":-103.457274},
+      {"latitude":20.732130, "longitude":-103.456939}
+    ]
+}
+{
+    "Name": "Zona Medicina",
+    "Spots": 20,
+    "SpecialSpots": 0,
+    "Cars": 3,
+    "Points": [
+      {"latitude":20.732654, "longitude":-103.457303},
+      {"latitude":20.732939, "longitude":-103.457261},
+      {"latitude":20.732935, "longitude":-103.457097},
+      {"latitude":20.733866, "longitude":-103.457033},
+      {"latitude":20.733906, "longitude":-103.457803},
+      {"latitude":20.732707, "longitude":-103.457916}
+    ]
+}
