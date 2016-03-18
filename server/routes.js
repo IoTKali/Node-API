@@ -68,6 +68,10 @@ module.exports = function(app){
     .get(function(req, res){
       User.index(req, res);
     });
+  router.route('/users/verify')
+    .post(function(req, res){
+      User.verify(req, res);
+  });
   router.route('/users')
     .post(function(req, res){
       User.create(req, res);

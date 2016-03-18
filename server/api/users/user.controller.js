@@ -54,6 +54,19 @@ exports.destroy = function(req, res) {
     });
   });
 };
+//verify
+exports.verify = function (req, res){
+  User.findOne({ Email: req.body.Email }, function(err, user) {
+    if(err) { return handleError(res, err); }
+    // test a matching password
+    if(user.Password === req.body.Password){
+      return res.status(200).json(user);
+    }
+    else {
+      return res.status(204).send('No Content');
+    }
+  });
+};
 
 function handleError(res, err) {
   return res.status(500).send(err);

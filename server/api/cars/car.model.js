@@ -8,6 +8,7 @@ var Schema   = mongoose.Schema;
 var carSchema = new Schema ({
   Plates: String,
   Brand: String,
+  Model: String,
   Year: Number
 });
 
