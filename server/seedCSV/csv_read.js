@@ -1,5 +1,5 @@
 var loader = require('csv-load-sync');
-var ZoneModel = require('../api/zones/parkZone.')
+var ZoneModel = require('../api/zones/parkZone.model');
 var csv = loader('./server/seedCSV/OcupacionEstacionamientoIndividual.csv');
 var seed = require('./seed');
 var Zones ={};
@@ -42,6 +42,6 @@ for (var zone in Zones) {
 DBZones.forEach(function(Zone){
   ZoneModel.create(Zone,function(err, zone){
     console.console.log('Crated');
-  })*/
-});
+  })
+});*/
 console.log(DBZones);

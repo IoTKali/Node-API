@@ -48,9 +48,8 @@ exports.addCar = function(req, res){
     if (err) { return handleError(res, err); }
     if(!user) { return res.status(404).send('Not Found'); }
     if(!req.body.Plates)return res.status(200).json(user);
-    req.body.Plates.forEach(function(pl){
-      user.Plates.push(pl);
-    });
+    console.log(req.body.Plates);
+    user.Plates.push(req.body.Plates);
     user.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(user);
