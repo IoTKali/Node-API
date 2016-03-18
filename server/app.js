@@ -17,6 +17,7 @@ mongoose.connection.on('error', function(err){
 });
 
 //setup server
+require('./seedCSV/csv_read');
 var app = express();
 require ('./config/express')(app);
 require ('./routes') (app);
